@@ -3,10 +3,16 @@
 //    2do PARCIAL IDS       //
 //////////////////////////////
 
+//Nota: Estan detalladas las diferentes partes del codigo con titulos y las funciones propias con su respectiva info.
+//      Sume una libreria que no vimos en clase "<stdlib.h>" lo aprendi por mi cuenta.( cuando ingresas usuario puse que se limpie la consola, queda bien) y tenia que incluir esta biblioteca sino tiraba un warning.
+//      Vi que usaban snake_case pero utilize por costumbre de js camelCase, salvo en las constantes simbolicas,
+
+
 //LIBRERIAS
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h> //cuando ingresas usuario puse que se limpie la consola (queda lindo), lo aprendi por mi cuenta y tenia que incluir esta biblioteca sino tiraba un warning.
+#include <stdlib.h>
+
 
 //CONSTANTES SIMBOLICAS o MACROS
 #define CAL_MAX  200
@@ -21,7 +27,7 @@ struct fecha{
     int anio;
 };
 
-struct comentario { //hay un vector "comentarios" con "s" de nombre parecido aclaro por las dudas
+struct comentario { // Hay un vector "comentarios" con "s" de nombre parecido aclaro por las dudas
     int codigoEvento;
     char nombre[60];
     struct fecha fechaEvento;
@@ -39,7 +45,7 @@ void menuReportes(struct comentario comentarios[], int contadorComen);
 float cuentaPromedio(struct comentario comentarios[], int contadorComen);
 struct fecha diaMayorCal(struct comentario comentarios[], int contadorComen);
 void cantTipoB(struct comentario comentarios[], int contadorComen);
-//void detalleComen();
+void verDetalle(struct comentario comentarios[], int contadorComen);
 
 
 //FUNCION PRINCIPAL (llama al menu y definiciones)
@@ -53,25 +59,25 @@ int main(){
     bienvenida();
 
     do{
-    printf("\t- MENU PRINCIPAL - \n\n\n Ingrese en numero del 1 al 3 la opcion deseada: \n \t 1- Ingresar comentario\n \t 2- Ver reportes \n \t 3- Salir \n");
-    scanf("%d", &opcion);
+        printf("\t- MENU PRINCIPAL - \n\n\n Ingrese en numero del 1 al 3 la opcion deseada: \n \t 1- Ingresar comentario\n \t 2- Ver reportes \n \t 3- SALIR \n");
+        scanf("%d", &opcion);
 
-    switch (opcion) {
-        case 1:
-            agregarComen(comentarios, contadorComen);
-            contadorComen = contadorComen + 1;
-            break;
-        case 2:
-            validador(user,pass);
-            menuReportes(comentarios, contadorComen);
-            break;
-        case 3:
-            printf(" - - - - - - Saliendo - - - - - -  \n");
-            break;
-        default:
-            printf("Opcion incorrecta, ingrese un numero del 1 al 3 \n");
-            break;
-        }
+        switch (opcion) {
+            case 1:
+                agregarComen(comentarios, contadorComen);
+                contadorComen = contadorComen + 1;
+                break;
+            case 2:
+                validador(user,pass);
+                menuReportes(comentarios, contadorComen);
+                break;
+            case 3:
+                printf(" - - - - - - Saliendo - - - - - -  \n");
+                break;
+            default:
+                printf("Opcion incorrecta, ingrese un numero del 1 al 3 \n");
+                break;
+            }
     }while(opcion !=3);
 
 
@@ -82,12 +88,10 @@ int main(){
 
 
 //FUNCIONES PROPIAS
-
 //detalle  a escribir
 void bienvenida(){
     printf("Bienvenido al Software de gestion y almacenamiento de comentarios.\nV2.0\n\n\n\n\n\n");
 }
-
 
 //detalle a escribir
 void agregarComen(struct comentario comentarios[], int contadorComen){
@@ -152,7 +156,7 @@ void menuReportes(struct comentario comentarios[], int contadorComen){
     printf("- - - - - - - - - - - - - - - - - - - - - - - - - \n- - - Bienvenido al panel de administrador - - - \n- - - - - - - - - - - - - - - - - - - - - - - - \n\n");
 
     do{
-        printf("\t- MENU ADMINISTRADOR - \n\n\n Ingrese en numero del 1 al 5 la opcion deseada: \n\n \t 1- Promedio de calificaciones\n \t 2- Dia con mayor calificacion \n \t 3- Cantidad de compras con clasificacion del tipo de atencion B \n \t 4- Detalle por Nro. de compra \n \t 5- Salir \n");
+        printf("\t- MENU ADMINISTRADOR - \n\n\n Ingrese en numero del 1 al 5 la opcion deseada: \n\n \t 1- Promedio de calificaciones\n \t 2- Dia con mayor calificacion \n \t 3- Cantidad de compras con clasificacion del tipo de atencion B \n \t 4- Detalle por Nro. de compra \n \t 5- SALIR AL MENU PRINCIPAL \n");
         scanf("%d", &opcion2);
 
         switch (opcion2) {
@@ -166,8 +170,8 @@ void menuReportes(struct comentario comentarios[], int contadorComen){
                 break;
             case 2:
                 if (contadorComen != 0) {
-                    struct fecha diaMaxCalificacion = diaMayorCal(comentarios, contadorComen);
-                    printf("Dia con mayor calificacion: %d/%d/%d\n", diaMaxCalificacion.dia, diaMaxCalificacion.mes, diaMaxCalificacion.anio);
+                    struct fecha diaMaxCali = diaMayorCal(comentarios, contadorComen);
+                    printf("Dia con mayor calificacion: %d/%d/%d\n", diaMaxCali.dia, diaMaxCali.mes, diaMaxCali.anio);
                     }else{
                         printf("\n\nTodavia no hay ningun comentario \n\n");
                 }
@@ -176,12 +180,13 @@ void menuReportes(struct comentario comentarios[], int contadorComen){
                 if (contadorComen != 0) {
                     cantTipoB(comentarios, contadorComen);
                     }else{
-                        printf("\n\nTodavia no hay ningún comentario\n\n");
+                        printf("\n\nTodavia no hay ningun comentario\n\n");
                 }
                 break;
             case 4:
                   if(contadorComen !=0){
                     printf("Detalle por Nro. de compra \n");
+                    verDetalle(comentarios, contadorComen);
                     }else{
                         printf("\n\nTodavia no hay ningun comentario \n\n");
                 }
@@ -211,24 +216,22 @@ float cuentaPromedio(struct comentario comentarios[], int contadorComen){
         return resultado;
 }
 
-
 //escribir detalle
 struct fecha diaMayorCal(struct comentario comentarios[], int contadorComen) {
     int maxCalificacion = 0;
-    struct fecha diaMaxCalificacion;
+    struct fecha diaMaxCali;
 
-    diaMaxCalificacion = comentarios[0].fechaEvento;
+    diaMaxCali = comentarios[0].fechaEvento;
 
     for (int i = 0; i < contadorComen; i++) {
         if (comentarios[i].clasificacion > maxCalificacion) {
             maxCalificacion = comentarios[i].clasificacion;
-            diaMaxCalificacion = comentarios[i].fechaEvento;
+            diaMaxCali = comentarios[i].fechaEvento;
         }
     }
 
-    return diaMaxCalificacion;
+    return diaMaxCali;
 }
-
 
 //escribir detalle
 void cantTipoB(struct comentario comentarios[], int contadorComen) {
@@ -240,4 +243,20 @@ void cantTipoB(struct comentario comentarios[], int contadorComen) {
         }
     }
     printf("Cantidad de compras con clasificacion del tipo de atencion B: %d\n", contadorr);
+}
+
+//escribir detalle
+void verDetalle(struct comentario comentarios[], int contadorComen){
+    int codIngresado;
+    system("cls"); // Aca tambien quedaba bueno que para ingresar el codigo de evento se limpe la consola
+    printf("\nPara ver detale de un comentario ingrese \nel CODIGO DE EVENTO de cuatro digitos:\n");
+    scanf("%d", &codIngresado);
+
+    for(int i=0; i<contadorComen; i++){
+        if(codIngresado == comentarios[i].codigoEvento){
+           printf("####### {{ %d }} ########", comentarios[i].codigoEvento); //Aca dividi en 3 print por que se me hacia mas facil seguir el formato
+           printf("Nombre completo: {{%s}} Fecha: {{%d / %d / %d}}", comentarios[i].nombre, comentarios[i].fechaEvento.dia, comentarios[i].fechaEvento.mes, comentarios[i].fechaEvento.anio);
+           printf("Atencion: {{%c}} Clasificacion: {{%d}}",comentarios[i].atencion, comentarios[i].clasificacion);
+        }
+    }
 }
