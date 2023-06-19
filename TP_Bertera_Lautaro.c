@@ -5,7 +5,7 @@
 
 //Nota: Estan detalladas las diferentes partes del codigo con titulos y las funciones propias con su respectiva info.
 //      Sume una libreria que no vimos en clase "<stdlib.h>" lo aprendi por mi cuenta.( cuando ingresas usuario puse que se limpie la consola, queda bien) y tenia que incluir esta biblioteca sino tiraba un warning.
-//      Vi que usaban snake_case pero utilize por costumbre de js camelCase, salvo en las constantes simbolicas,
+//      Vi que usaban snake_case pero utilize por costumbre de JS camelCase, salvo en las constantes simbolicas,
 
 
 //LIBRERIAS
@@ -37,7 +37,7 @@ struct comentario { // Hay un vector "comentarios" con "s" de nombre parecido ac
 
 
 //PROTOTIPADO DE FUNCIONES PROPIAS
-//Cada una cuenta con objetivos, parametros, parametros que recibe, valor que devuelve en un comentario
+//Cada una cuenta con objetivos, parametros que recibe, valor que devuelve
 void bienvenida();
 void agregarComen(struct comentario comentarios[], int contadorComen);
 void validador(char user[], char pass[]);
@@ -88,20 +88,20 @@ int main(){
 
 
 //FUNCIONES PROPIAS
-//detalle  a escribir
+//Funcion bienvenida: da un saludo al iniciar el programa.
+//No recibe nada por parametros.
+//No devuelve nada ya que es de tipo void.
 void bienvenida(){
     printf("Bienvenido al Software de gestion y almacenamiento de comentarios.\nV2.0\n\n\n\n\n\n");
 }
 
-//detalle a escribir
+//Funcion agregar comentario: Crea un nuevo comentario y lo suma al vector de comentarios.
+//Recibe por parametro el vector de comentarios comentarios[] y el contador de comentarios totales contadorComen.
+//No devuelve nada ya que es de tipo void.
 void agregarComen(struct comentario comentarios[], int contadorComen){
-
     if(contadorComen>=CAL_MAX){
         printf("Maxima cantidad de comentarios alcanzada");
-
     }else{
-
-
     printf("\n---Ha seleccionado la opcion Agregar comentarios, acontinuacion se le pedira que complete los 5 campos--- \n\n");
     struct comentario aux;
 
@@ -127,13 +127,13 @@ void agregarComen(struct comentario comentarios[], int contadorComen){
     printf("Ingrese la calificacion del servicio en formato numero entero del 1 al 10\n");
     scanf("%d",&aux.clasificacion);
 
-
-
     comentarios[contadorComen] = aux;
     }
 }
 
-//escribir detalle
+//Funcion validador: Valida el usuario administrador con USER & PASS para entrar al menu administrador.
+//Recibe por parametro los strigns de user y pass inicializados en la funcion main.
+//No devuelve nada ya que es de tipo void.
 void validador(char user[], char pass[]){
     printf("\n Para acceder a esta opcion del menu debe ingresar USER & PASS \n");
     do{
@@ -149,7 +149,9 @@ void validador(char user[], char pass[]){
     system("cls"); // esto lo busque por mi cuenta! Me gusto el efecto que da. Parece que estas entrando en otra interfaz cuando pones tu usuario, algo estetico digamos no soluciona nada en si.
 }
 
-//escribir detalle
+//Funcion menu reportes de administrador o menu2: inicia un do while que contiene un switch con las opciones para ver estadisticas de administrador.
+//Recibe por parametro el vector de comentarios comentarios[] y el contador de comentarios totales contadorComen.
+//No devuelve nada ya que es de tipo void.
 void menuReportes(struct comentario comentarios[], int contadorComen){
     int opcion2;
     float promedio;
@@ -201,7 +203,9 @@ void menuReportes(struct comentario comentarios[], int contadorComen){
         }while(opcion2 !=5);
 }
 
-//escribir detalle
+//Funcion cuenta promedio: hace la cuenta para sacar el promedio de de las clasifiaciones que hicieron los usuarios.
+//Recibe por parametro el vector de comentarios comentarios[] y el contador de comentarios totales contadorComen.
+//Devuelve un float que es el resultado de la cuenta.
 float cuentaPromedio(struct comentario comentarios[], int contadorComen){
 
         int sumaCalifi=0;
@@ -216,7 +220,9 @@ float cuentaPromedio(struct comentario comentarios[], int contadorComen){
         return resultado;
 }
 
-//escribir detalle
+//Funcion dia de mayor calificacion: bucle for que encuentra el dia que se realizo la mayor calificacion.
+//Recibe por parametro el vector de comentarios comentarios[] y el contador de comentarios totales contadorComen.
+//Devuelve un struct fecha con el dia que fue la mayor calificacion.
 struct fecha diaMayorCal(struct comentario comentarios[], int contadorComen) {
     int maxCalificacion = 0;
     struct fecha diaMaxCali;
@@ -233,7 +239,9 @@ struct fecha diaMayorCal(struct comentario comentarios[], int contadorComen) {
     return diaMaxCali;
 }
 
-//escribir detalle
+//Funcion cantidad de clasificacion tipo B: bucle for que cuenta las clasificiones por parte del usuario de tipo B.
+//Recibe por parametro el vector de comentarios comentarios[] y el contador de comentarios totales contadorComen.
+//No devuelve nada ya que es de tipo void.
 void cantTipoB(struct comentario comentarios[], int contadorComen) {
     int contadorr=0;
 
@@ -245,7 +253,9 @@ void cantTipoB(struct comentario comentarios[], int contadorComen) {
     printf("Cantidad de compras con clasificacion del tipo de atencion B: %d\n", contadorr);
 }
 
-//escribir detalle
+//Funcion ver detalle de comentario: encuentra por medio del ID codigo evento el comentario  buscado y muestra todos sus detalles.
+//Recibe por parametro el vector de comentarios comentarios[] y el contador de comentarios totales contadorComen.
+//No devuelve nada ya que es de tipo void.
 void verDetalle(struct comentario comentarios[], int contadorComen){
     int codIngresado;
     system("cls"); // Aca tambien quedaba bueno que para ingresar el codigo de evento se limpe la consola
